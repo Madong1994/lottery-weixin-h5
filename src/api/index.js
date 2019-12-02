@@ -7,10 +7,17 @@ var fileURL = 'http://127.0.0.1:8081/lottery'
 export const fileUploadURL = 'http://182.61.39.148:8082/lottery/upload/image'
 
 /**----------------start------------- */
-export const queryGoods = page => {
+export const queryByCarousel = page => {
     return axios.get(
         webURL +
         '/goods/state'
+    )
+}
+/**查询商品 */
+export const queryGoods = page => {
+    return axios.get(
+        webURL +
+        '/activ/carousel'
     )
 }
 

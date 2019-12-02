@@ -1,8 +1,8 @@
 <template>
   <div id="home" class="home">
     <van-swipe :autoplay="3000" style="height: 15rem">
-      <van-swipe-item v-for="(image, index) in images" :key="index">
-        <img v-lazy="image" class="sm-height-100-per sm-width-100-per" />
+      <van-swipe-item v-for="(item, index) in listCarousel" :key="index">
+        <img v-lazy="item." class="sm-height-100-per sm-width-100-per" />
       </van-swipe-item>
     </van-swipe>
     <!-- <div style="height:2rem; color: rgba(69, 90, 100, 0.6);background-color: #f0f3f6;" class="sm-width-100-per sm-layout-left-center sm-padding-left-1rem">
@@ -40,7 +40,7 @@
 <script>
 import "../css/smart.css";
 import tabbar from "../components/TabbarNav.vue";
-import { queryGoods } from "../api/index";
+import { queryGoods, queryByCarousel } from "../api/index";
 import { Swipe, SwipeItem, Row, Col, Toast } from "vant";
 export default {
   name: "home",
@@ -54,6 +54,7 @@ export default {
         "https://img.yzcdn.cn/vant/apple-1.jpg",
         "https://img.yzcdn.cn/vant/apple-2.jpg"
       ],
+      listCarousel: [],
       listData: [],
       windowSizeObj: {
         height: null,
@@ -88,6 +89,16 @@ export default {
         } else if (resData.code == 0) {
           debugger;
           that.listData = resData.data;
+        }
+      });
+      queryByCarousel().then(res => {
+        let resData = res.data;
+        if (resData.code == -1) {
+          //失败
+          Toast.fail("获取数据失败");
+        } else if (resData.code == 0) {
+          debugger;
+          that.listCarousel = resData.data;
         }
       });
     }
