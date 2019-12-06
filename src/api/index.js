@@ -10,14 +10,14 @@ export const fileUploadURL = 'http://182.61.39.148:8082/lottery/upload/image'
 export const queryByCarousel = page => {
     return axios.get(
         webURL +
-        '/goods/state'
+        '/activ/carousel'
     )
 }
 /**查询商品 */
 export const queryGoods = page => {
     return axios.get(
         webURL +
-        '/activ/carousel'
+        '/goods/state'
     )
 }
 

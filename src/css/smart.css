@@ -759,6 +759,9 @@
 .sm-background-color-red {
     background: #FF0000;
 }
+.sm-background-color-white {
+    background: #FFFFFF;
+}
 
 .sm-text-color-white {
     color: #FFFFFF;
