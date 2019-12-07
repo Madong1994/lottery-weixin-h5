@@ -12,7 +12,7 @@
       <van-grid-item style="color: #FF8800;background: red" icon="shop-collect" text="商城" />
       <van-grid-item style="color: #ff4444;background: red" icon="point-gift" text="抽奖" />
       <van-grid-item style="color: #FF8800;background: red" icon="diamond" text="赞助" />
-      <van-grid-item style="color: #42a5f5;background: red" icon="share" text="分享" />
+      <van-grid-item style="color: #ff4444;background: red" icon="fire" to="/grab" text="抢！Iphone" />
     </van-grid>
 
     <van-grid class="sm-margin-top-05rem" :border="true" :column-num="2">
@@ -82,10 +82,11 @@
           </div>
         </div>
         <van-field
-          v-model="value"
+          v-model="submitBarObj.pinGoCode"
           style="width:80%;text-align:center"
           input-align="center"
           autofocus="true"
+          v-on:input="inputChange"
           placeholder="请输入拼go码"
         />
         <div class="sm-width-80-per sm-height-20-per sm-layout-center-horizontal">
@@ -96,6 +97,8 @@
           >********</van-tag>
         </div>
         <van-submit-bar
+          :disabled="submitBarObj.noenable"
+          :loading="submitBarObj.loading"
           tip="你的收货地址不支持同城送, 我们已为你推荐快递"
           :price="actionObj.price"
           button-text="提交订单"
@@ -148,6 +151,11 @@ export default {
         show: false,
         title: null,
         price: 1
+      },
+      submitBarObj: {
+        noenable: true,
+        loading: false,
+        pinGoCode: null
       }
     };
   },
@@ -176,7 +184,6 @@ export default {
           //失败
           Toast.fail("获取数据失败");
         } else if (resData.code == 0) {
-          debugger;
           that.listData = resData.data;
         }
       });
@@ -186,7 +193,6 @@ export default {
           //失败
           Toast.fail("获取数据失败");
         } else if (resData.code == 0) {
-          debugger;
           that.listCarousel = resData.data;
         }
       });
@@ -197,6 +203,15 @@ export default {
       that.actionObj.title = goods.goodsName;
       that.actionObj.show = true;
       that.actionObj.price = goods.actualPrice * 100;
+    },
+    inputChange: function(value) {
+      console.log(this.submitBarObj.pinGoCode);
+      if (this.submitBarObj.pinGoCode != null) {
+        this.submitBarObj.noenable = false;
+      }
+    },
+    onSubmit: function(e) {
+      this.submitBarObj.loading = true;
     }
   }
 };
@@ -221,5 +236,6 @@ a {
 }
 .home {
   background-color: rgba(255, 255, 255, 0.4);
+  padding-bottom: 53px;
 }
 </style>

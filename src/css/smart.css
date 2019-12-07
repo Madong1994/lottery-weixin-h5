@@ -87,6 +87,12 @@
 .margin-bottom-20 {
     margin-bottom: 20px;
 }
+.margin-bottom-05 {
+    margin-bottom: 0.5rem;
+}
+.margin-bottom-08 {
+    margin-bottom: 0.8rem;
+}
 
 .margin-left-20 {
     margin-left: 20px;
@@ -305,6 +311,9 @@
 
 .sm-width-85-per {
     width: 85%;
+}
+.sm-width-95-per {
+    width: 95%;
 }
 
 .sm-width-66-per {

@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import TabbarNav from '@/components/TabbarNav'
 import Mine from '@/components/Mine'
 import Home from '@/components/Home'
+import Grab from '@/components/Grab'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/grab',
+      name: 'grab',
+      component: Grab
     }
   ]
 })
