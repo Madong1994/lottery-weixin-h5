@@ -178,7 +178,6 @@ export default {
     this.getData();
   },
   mounted() {
-    console.log("00000");
     const that = this;
     window.onresize = () => {
       return (() => {

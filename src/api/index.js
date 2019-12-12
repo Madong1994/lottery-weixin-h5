@@ -32,9 +32,14 @@ export const authoCode = page => {
  * 微信授权相关---结束 */
 
 /**----------------start------------- */
+/** 获取用户头像和nickName */
+export const ganUserInfo = (openid) => {
+    console.log("const ganUserInfo ===========")
+    console.log(openid)
+    return axios.get(webURL + '/user/info?openid=' + openid)
+}
 /** 购买 */
 export const creatOrder = (formData) => {
-    debugger
     return axios.post(webURL + '/creat/order', formData)
 }
 /** 查询轮播 */

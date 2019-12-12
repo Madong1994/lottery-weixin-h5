@@ -40,8 +40,6 @@ export default {
       let that = this;
       let openid = this.$utils.getUrlKey("openid");
       let token = this.$utils.getUrlKey("token");
-      console.log("-----------------token");
-      console.log(token);
       if (
         typeof token == "undefined" ||
         typeof openid == "undefined" ||
@@ -49,8 +47,6 @@ export default {
         openid == null
       ) {
         authoCode().then(res => {
-          console.log(res);
-          console.log("--------------------------");
           let resData = res.data;
           if (resData.code == 0) {
             let reUrl = resData.data;

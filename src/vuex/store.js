@@ -7,7 +7,9 @@ const store = new Vuex.Store({
     state: {
         // 存储token
         Authorization: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
-        openid: localStorage.getItem('openid') ? localStorage.getItem('openid') : ''
+        openid: localStorage.getItem('openid') ? localStorage.getItem('openid') : '',
+        nickName: localStorage.getItem('nickName') ? localStorage.getItem('nickName') : '',
+        icon: localStorage.getItem('icon') ? localStorage.getItem('icon') : ''
     },
 
     mutations: {
@@ -20,6 +22,14 @@ const store = new Vuex.Store({
         changeOpenid(state, openid) {
             state.openid = openid;
             localStorage.setItem('openid', openid);
+        },
+        changeIcon(state, icon) {
+            state.icon = icon;
+            localStorage.setItem('icon', icon);
+        },
+        changeNickName(state, nickName) {
+            state.nickName = nickName;
+            localStorage.setItem('nickName', nickName);
         }
     }
 });

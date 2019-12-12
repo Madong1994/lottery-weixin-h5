@@ -42,19 +42,20 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   debugger
   if (to.path === '/') {
-    console.log("--------------------------");
-    next();
+    let token = localStorage.getItem('Authorization');
+    if (token === 'null' || token === '' || token === null) {
+      next();
+    } else {
+      next('/home');
+    }
   } else if (to.path === '/' && from.path === '/home') {
     //什么都不做
   } else {
-    console.log("-------------next-------------");
     let token = localStorage.getItem('Authorization');
     console.log(token)
     if (token === 'null' || token === '' || token === null) {
-      console.log("---true---")
       next('/');
     } else {
-      console.log("---false---")
       next();
     }
   }
