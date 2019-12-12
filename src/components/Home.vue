@@ -115,7 +115,13 @@
 <script>
 import "../css/smart.css";
 import tabbar from "../components/TabbarNav.vue";
-import { queryGoods, queryByCarousel } from "../api/index";
+import {
+  queryGoods,
+  queryByCarousel,
+  authoCode,
+  authoToken,
+  creatOrder
+} from "../api/index";
 import {
   Swipe,
   SwipeItem,
@@ -150,7 +156,8 @@ export default {
       actionObj: {
         show: false,
         title: null,
-        price: 1
+        price: 1,
+        goodsId: ""
       },
       submitBarObj: {
         noenable: true,
@@ -160,6 +167,14 @@ export default {
     };
   },
   created() {
+    // authoCode().then(res => {
+    //   console.log(res);
+    //   let resData = res.data;
+    //   if (resData.code == 0) {
+    //     let reUrl = resData.data;
+    //     authoToken(reUrl).then(res => {});
+    //   }
+    // });
     this.getData();
   },
   mounted() {
@@ -203,6 +218,7 @@ export default {
       that.actionObj.title = goods.goodsName;
       that.actionObj.show = true;
       that.actionObj.price = goods.actualPrice * 100;
+      that.actionObj.goodsId = goods.id;
     },
     inputChange: function(value) {
       console.log(this.submitBarObj.pinGoCode);
@@ -211,7 +227,26 @@ export default {
       }
     },
     onSubmit: function(e) {
+      let that = this;
       this.submitBarObj.loading = true;
+      let requestData = {
+        id: that.actionObj.goodsId,
+        payCode: that.submitBarObj.pinGoCode
+      };
+      creatOrder(requestData).then(res => {
+        let resData = res.data;
+        that.submitBarObj.pinGoCode = "";
+        if (resData.code == 0) {
+          that.submitBarObj.loading = false;
+          that.actionObj.show = false;
+          Toast.success("购买成功");
+        } else {
+          that.submitBarObj.loading = false;
+          that.actionObj.show = false;
+          Toast.fail(resData.msg);
+        }
+        console.log(res);
+      });
     }
   }
 };

@@ -1,13 +1,45 @@
 import axios from 'axios'
+axios.interceptors.request.use(
+    config => {
+        if (localStorage.getItem('Authorization')) {
+            config.headers.Authorization = localStorage.getItem('Authorization');
+        }
 
-var webURL = 'http://192.168.1.119:8081/lottery/api'
+        return config;
+    },
+    error => {
+        return Promise.reject(error);
+    });
+// var webURL = 'http://192.168.1.119:8081/lottery/api'
+var webURL = 'http://zwpj6g.natappfree.cc/weixin/api'
 
 var fileURL = 'http://127.0.0.1:8081/lottery'
 
 export const fileUploadURL = 'http://182.61.39.148:8082/lottery/upload/image'
 
+/**
+ * 微信授权相关---开始 */
+export const authoToken = url => {
+    return axios.get(url)
+}
+export const authoCode = page => {
+    return axios.get(
+        webURL +
+        '/code'
+    )
+}
+/**
+ * 微信授权相关---结束 */
+
 /**----------------start------------- */
+/** 购买 */
+export const creatOrder = (formData) => {
+    debugger
+    return axios.post(webURL + '/creat/order', formData)
+}
+/** 查询轮播 */
 export const queryByCarousel = page => {
+    console.log(axios)
     return axios.get(
         webURL +
         '/activ/carousel'
